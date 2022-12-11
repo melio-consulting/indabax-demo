@@ -15,8 +15,9 @@ router = APIRouter()
 
 
 ## Change this portion for other types of models
+## Add the correct type hinting when completed
 def get_prediction(data_point):
-    model.predict(data_point, load_wrapper=joblib.load, method="predict")
+    return model.predict(data_point, load_wrapper=joblib.load, method="predict")
 
 
 @router.post(
