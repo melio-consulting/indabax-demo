@@ -4,7 +4,7 @@ IndabaX Demo 2022
 
 ## Development Requirements
 
-- Python3.11.9
+- Python3.11.0
 - Pip
 - Poetry (Python Package Manager)
 
