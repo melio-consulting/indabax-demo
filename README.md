@@ -59,12 +59,13 @@ Application parts are:
     app
     |
     | # Fast-API stuff
-    ├── api              - web related stuff.
-    │   └── routes       - web routes.
-    ├── core             - application configuration, startup events, logging.
-    ├── models           - pydantic models for this application.
-    ├── services         - logic that is not just crud related.
-    └── main.py          - FastAPI application creation and configuration.
+    ├── api                 - web related stuff.
+    │   └── routes          - web routes.
+    ├── core                - application configuration, startup events, logging.
+    ├── models              - pydantic models for this application.
+    ├── services            - logic that is not just crud related.
+    ├── main-aws-lambda.py  - FastAPI application for AWS Lambda creation and configuration.
+    └── main.py             - FastAPI application creation and configuration.
     |
     | # ML stuff
     ├── data             - where you persist data locally
@@ -89,3 +90,38 @@ Application parts are:
     │       └── train_model.py
     │
     └── tests            - pytest
+
+## GCP
+Deploying inference service to Cloud Run
+
+### Authenticate
+
+1. Install `gcloud` cli
+2. `gcloud auth login`
+3. `gcloud config set project <PROJECT_ID>`
+
+### Enable APIs
+
+1. Cloud Run API
+2. Cloud Build API
+
+### Deploy to Cloud Run
+
+1. Run `gcp-deploy.sh`
+
+## AWS
+Deploying inference service to AWS Lambda
+
+### Authenticate
+
+1. Install `awscli` and `sam-cli`
+2. `aws configure`
+
+### Deploy to Lambda
+
+1. Run `sam build`
+2. Run `sam deploy --guided`
+
+### Clean up
+
+`aws cloudformation delete-stack --stack-name <STACK_NAME_ON_CREATION>`
