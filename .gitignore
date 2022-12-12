@@ -93,3 +93,7 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# aws specific folders
+.aws-sam
+samconfig.toml
