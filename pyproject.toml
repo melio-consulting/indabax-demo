@@ -20,6 +20,12 @@ black = {version = "^19.10b0", allow-prereleases = true}
 autopep8 = "^2.0.0"
 ipdb = "^0.13.0"
 
+[tool.poetry.group.aws]
+optional = true
+
+[tool.poetry.group.aws.dependencies]
+mangum = "^0.17.0"
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
