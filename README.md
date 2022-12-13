@@ -104,10 +104,16 @@ Deploying inference service to Cloud Run
 
 1. Cloud Run API
 2. Cloud Build API
+3. IAM API
 
 ### Deploy to Cloud Run
 
 1. Run `gcp-deploy.sh`
+
+### Clean up
+
+1. Delete Cloud Run
+2. Delete Docker image in GCR
 
 ## AWS
 Deploying inference service to AWS Lambda

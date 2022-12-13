@@ -26,14 +26,15 @@ def get_prediction(data_point):
     name="predict:get-data",
 )
 async def predict(data_input: MachineLearningDataInput):
+
     if not data_input:
-        raise HTTPException(status_code=404, detail=f"'data_input' argument invalid!")
+        raise HTTPException(status_code=404, detail="'data_input' argument invalid!")
     try:
         data_point = data_input.get_np_array()
         prediction = get_prediction(data_point)
 
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Exception: {e}")
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=f"Exception: {err}")
 
     return MachineLearningResponse(prediction=prediction)
 
