@@ -45,4 +45,4 @@ jobs:
       - id: 'build-and-deploy'
         name: 'Build Docker Image on Cloud Build and Deploy on Cloud Run'
         run: |
-          sh gcp-deploy.sh -name inference-service -region europe-west3
+          sh gcp-deploy.sh -n inference-service -r europe-west3

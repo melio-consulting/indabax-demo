@@ -2,11 +2,11 @@
 
 set -e 
 
-while getopts name:region: opt
+while getopts n:r: opt
 do 
   case "${opt}" in
-      name) name="$OPTARG";;
-      region) region="$OPTARG";;
+      n) name="$OPTARG";;
+      r) region="$OPTARG";;
       \?) echo "Invalid option -$OPTARG" >&2
       exit 1;;
   esac
