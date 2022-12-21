@@ -1,36 +1,35 @@
-#!/bin/sh
+#!/bin/bash
 
-NAME="$1"
-REGION="europe-west3"
+set -e 
+
+while getopts n:r: opt
+do 
+  case "${opt}" in
+      n) name="$OPTARG";;
+      r) region="$OPTARG";;
+      \?) echo "Invalid option -$OPTARG" >&2
+      exit 1;;
+  esac
+done
+
 PROJECT_ID=$(gcloud config get-value project)
-DOCKER_IMG="gcr.io/$PROJECT_ID/$NAME"
-
-gcloud config 
-
-# Check whoami
-echo "1"
-echo $(gcloud config list account)
-echo "2"
-echo $(gcloud auth list)
-echo "3"
-echo $(gcloud config list)
-echo "4"
+DOCKER_IMG="gcr.io/$PROJECT_ID/$name"
 
 # Build Docker image using Cloud Build
 gcloud builds submit --tag $DOCKER_IMG --timeout=500s
 
 # Deploy built Docker image to Cloud Run
-gcloud run deploy $NAME \
+gcloud run deploy $name \
   --image $DOCKER_IMG \
   --platform managed \
-  --region $REGION \
+  --region $region \
   --timeout 500s \
   --allow-unauthenticated
 
 INFERENCE_ENDPOINT=$( 
-  gcloud run services describe $NAME \
+  gcloud run services describe $name \
   --platform managed \
-  --region $REGION \
+  --region $region \
   --format "value(status.url)" \
 )
 
