@@ -35,19 +35,19 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v1
 
 
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        workload_identity_provider: 'projects/indabax-demo/locations/global/workloadIdentityPools/demo-pool/'
-        service_account: 'my-service-account@indabax-demo.iam.gserviceaccount.com'
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/indabax-demo/locations/global/workloadIdentityPools/demo-pool/'
+          service_account: 'my-service-account@indabax-demo.iam.gserviceaccount.com'
 
-    - id: 'deploy'
-      name: 'Deploy on Cloud Run'
-      uses: 'google-github-actions/deploy-cloudrun@v1'
-      with:
-        image: 'gcr.io/cloudrun/hello'
-        service: 'hello-cloud-run'
+      - id: 'deploy'
+        name: 'Deploy on Cloud Run'
+        uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          image: 'gcr.io/cloudrun/hello'
+          service: 'hello-cloud-run'
 
-    - name: 'Use output'
-      run: 'curl "${{ steps.deploy.outputs.url }}"'
+      - name: 'Use output'
+        run: 'curl "${{ steps.deploy.outputs.url }}"'
