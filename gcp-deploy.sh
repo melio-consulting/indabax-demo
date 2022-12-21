@@ -5,6 +5,9 @@ REGION="europe-west3"
 PROJECT_ID=$(gcloud config get-value project)
 DOCKER_IMG="gcr.io/$PROJECT_ID/$NAME"
 
+# Check whoami
+gcloud config list account --format "value(core.account)"
+
 # Build Docker image using Cloud Build
 gcloud builds submit --tag $DOCKER_IMG --timeout=500s
 
