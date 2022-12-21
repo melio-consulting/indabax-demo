@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NAME="inference-service"
+NAME="$1"
 REGION="europe-west3"
 PROJECT_ID=$(gcloud config get-value project)
 DOCKER_IMG="gcr.io/$PROJECT_ID/$NAME"
@@ -16,7 +16,7 @@ gcloud run deploy $NAME \
   --timeout 500s \
   --allow-unauthenticated
 
-INFERENCE_ENDPOINT=$( \
+INFERENCE_ENDPOINT=$( 
   gcloud run services describe $NAME \
   --platform managed \
   --region $REGION \

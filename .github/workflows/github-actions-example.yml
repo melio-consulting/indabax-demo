@@ -35,17 +35,6 @@ jobs:
       # - name: Test with pytest
       #   run: |
       #     make test
-      - name: Checkout actions-oidc-debugger
-        uses: actions/checkout@v3
-        with:
-          repository: github/actions-oidc-debugger
-          ref: main
-          path: ./.github/actions/actions-oidc-debugger
-      - name: Debug OIDC Claims
-        uses: ./.github/actions/actions-oidc-debugger
-        with:
-          audience: 'https://github.com/github'
-
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
@@ -54,12 +43,17 @@ jobs:
           service_account: 'my-service-account@indabax-demo.iam.gserviceaccount.com'
           token_format: 'access_token'
 
-      - id: 'deploy'
-        name: 'Deploy on Cloud Run'
-        uses: 'google-github-actions/deploy-cloudrun@v1'
-        with:
-          image: 'gcr.io/cloudrun/hello'
-          service: 'hello-cloud-run'
+      - id: 'build-and-deploy'
+        name: 'Build Docker Image on Cloud Build and Deploy on Cloud Run'
+        run: |
+          bash -c "gcp-deploy.sh indabax-demo-inference-service"
 
-      - name: 'Use output'
-        run: 'curl "${{ steps.deploy.outputs.url }}"'
+      # - id: 'deploy'
+      #   name: 'Deploy on Cloud Run'
+      #   uses: 'google-github-actions/deploy-cloudrun@v1'
+      #   with:
+      #     image: 'gcr.io/cloudrun/hello'
+      #     service: 'hello-cloud-run'
+
+      # - name: 'Use output'
+      #   run: 'curl "${{ steps.deploy.outputs.url }}"'
