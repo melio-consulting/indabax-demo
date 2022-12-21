@@ -16,7 +16,7 @@ PROJECT_ID=$(gcloud config get-value project)
 DOCKER_IMG="gcr.io/$PROJECT_ID/$name"
 
 # Build Docker image using Cloud Build
-gcloud builds submit --tag $DOCKER_IMG --timeout=500s
+gcloud builds submit --tag $DOCKER_IMG --timeout=500s --suppress-logs
 
 # Deploy built Docker image to Cloud Run
 gcloud run deploy $name \
